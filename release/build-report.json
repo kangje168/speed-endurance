@@ -1,0 +1,42 @@
+﻿{
+    "version":  "1.0.0",
+    "builtAtUtc":  "2026-10-13T12:42:13.3795240Z",
+    "package":  "SpeedEndurance-1.0.0.iq",
+    "sha256":  "B6E3A4D0493DC60348873A5E780E1214E4BD2CF9DF2F1A50DB962168463273A1",
+    "matrix":  [
+                   {
+                       "device":  "fr255",
+                       "compiled":  true,
+                       "nativeTests":  "passed",
+                       "testsPassed":  12,
+                       "runnerExitCode":  1,
+                       "log":  "fr255-tests.txt"
+                   },
+                   {
+                       "device":  "fr255m",
+                       "compiled":  true,
+                       "nativeTests":  "passed",
+                       "testsPassed":  12,
+                       "runnerExitCode":  1,
+                       "log":  "fr255m-tests.txt"
+                   },
+                   {
+                       "device":  "fr255s",
+                       "compiled":  true,
+                       "nativeTests":  "passed",
+                       "testsPassed":  12,
+                       "runnerExitCode":  1,
+                       "log":  "fr255s-tests.txt"
+                   },
+                   {
+                       "device":  "fr255sm",
+                       "compiled":  true,
+                       "nativeTests":  "passed",
+                       "testsPassed":  12,
+                       "runnerExitCode":  1,
+                       "log":  "fr255sm-tests.txt"
+                   }
+               ],
+    "hardwareValidation":  "Pending: complete release/HARDWARE-TESTS.md before store submission.",
+    "archiveValidation":  "Manifest and binaries verified for all four intended devices; no private keys or tool files included."
+}

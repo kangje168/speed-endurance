@@ -1,0 +1,22 @@
+{
+  "name": "Speed Endurance",
+  "version": "1.0.0",
+  "publisher": "kangje168",
+  "supportEmail": "dukang668@gmail.com",
+  "privacyPolicyUrl": "https://kangje168.github.io/speed-endurance-privacy/",
+  "appId": "a5b8657e9da44c87b9b0177f94c368a1",
+  "type": "watch-app",
+  "language": "English",
+  "pricing": "Free",
+  "devices": ["fr255", "fr255m", "fr255s", "fr255sm"],
+  "devicePartNumbers": {
+    "fr255": "006-B3992-00",
+    "fr255m": "006-B3990-00",
+    "fr255s": "006-B3993-00",
+    "fr255sm": "006-B3991-00"
+  },
+  "permissions": ["Positioning", "Fit"],
+  "developerServer": false,
+  "ads": false,
+  "accountRequiredInApp": false
+}

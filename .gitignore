@@ -1,0 +1,11 @@
+bin/
+*.prg
+*.iq
+*.der
+*.pem
+*.debug.xml
+.tools/
+.private/
+release/*.iq
+release/build-logs/
+bin-*/
