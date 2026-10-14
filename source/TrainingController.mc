@@ -4,6 +4,7 @@ using Toybox.ActivityRecording;
 using Toybox.Attention;
 using Toybox.Lang;
 using Toybox.Position;
+using Toybox.Sensor;
 using Toybox.System;
 using Toybox.Time;
 using Toybox.Timer;
@@ -16,6 +17,12 @@ class TrainingController {
     var speed = null;
     var fixValid = false;
     var fixAt = null;
+    var fixQuality = Position.QUALITY_NOT_AVAILABLE;
+    var hasLocation = false;
+    var page = 0;
+    var heartRate = null;
+    var heartRateAt = null;
+    var completedRunMs = 0;
     var best as Lang.Dictionary;
     var history as Lang.Array;
     var pendingRest as Lang.Dictionary or Null = null;
@@ -59,12 +66,28 @@ class TrainingController {
     }
 
     function open() {
-        Position.enableLocationEvents(Position.LOCATION_CONTINUOUS, method(:onPosition));
+        var options = { :acquisitionType => Position.LOCATION_CONTINUOUS };
+        if (Position has :hasConfigurationSupport) {
+            if ((Position has :CONFIGURATION_GPS_GLONASS_GALILEO_BEIDOU_L1_L5) &&
+                Position.hasConfigurationSupport(Position.CONFIGURATION_GPS_GLONASS_GALILEO_BEIDOU_L1_L5)) {
+                options[:configuration] = Position.CONFIGURATION_GPS_GLONASS_GALILEO_BEIDOU_L1_L5;
+            }
+        }
+        Position.enableLocationEvents(options, method(:onPosition));
+        Sensor.setEnabledSensors([Sensor.SENSOR_HEARTRATE]);
+        Sensor.enableSensorEvents(method(:onSensor));
         timer.start(method(:onTick), 1000, true);
+    }
+
+    function onSensor(info as Sensor.Info) as Void {
+        heartRate = info.heartRate;
+        heartRateAt = System.getTimer();
     }
 
     function onPosition(info as Position.Info) as Void {
         speed = info.speed;
+        fixQuality = info.accuracy;
+        hasLocation = info.position != null;
         fixValid = info.accuracy >= Position.QUALITY_USABLE && speed != null && speed >= 0;
         fixAt = System.getTimer();
         if (!fixValid && engine.state == TrainingEngine.RUNNING) {
@@ -74,6 +97,19 @@ class TrainingController {
 
     function gpsReady(now) {
         return fixValid && fixAt != null && now - fixAt <= 2500;
+    }
+
+    function canStart(now) {
+        return hasLocation && fixQuality >= Position.QUALITY_POOR && fixAt != null && now - fixAt <= 5000;
+    }
+
+    function gpsStatus(now) {
+        if (fixAt == null) { return "GPS: searching"; }
+        if (now - fixAt > 5000) { return "GPS: stale"; }
+        if (!hasLocation || fixQuality < Position.QUALITY_POOR) { return "GPS: searching"; }
+        if (fixQuality < Position.QUALITY_USABLE) { return "GPS: weak"; }
+        if (speed == null || speed < 0) { return "Speed: waiting"; }
+        return "GPS: ready";
     }
 
     function onTick() as Void {
@@ -113,7 +149,7 @@ class TrainingController {
             finishRun("manual");
             alert("Stopped - rest");
         } else if (engine.state == TrainingEngine.READY || engine.state == TrainingEngine.RESTING) {
-            if (!gpsReady(now)) { alert("Wait for GPS"); return; }
+            if (!canStart(now)) { alert(gpsStatus(now)); return; }
             if (recordingError) { alert("FIT stop failed"); return; }
             try {
                 if (session == null) {
@@ -128,13 +164,15 @@ class TrainingController {
             }
             finishRest(now);
             engine.start(now);
-            engine.tick(now, speed, true);
+            engine.tick(now, speed, gpsReady(now));
             notice = "";
         }
         WatchUi.requestUpdate();
     }
 
     function finishRun(reason) {
+        page = 0;
+        completedRunMs += engine.lastDuration;
         if (session != null && session.isRecording()) {
             try { session.addLap(); } catch (error) { System.println("FIT lap failed"); }
             pauseRecording();
@@ -182,6 +220,8 @@ class TrainingController {
             if (history.size() > 0) {
                 historyIndex = (historyIndex + (delta < 0 ? 1 : -1) + history.size()) % history.size();
             }
+        } else if (engine.state == TrainingEngine.RUNNING) {
+            page = 1 - page;
         } else {
             engine.selectTarget(delta);
             Application.Storage.setValue("target_v1", engine.target);
@@ -231,6 +271,7 @@ class TrainingController {
         }
         closed = true;
         Position.enableLocationEvents(Position.LOCATION_DISABLE, null);
+        Sensor.enableSensorEvents(null);
         persist();
         return true;
     }

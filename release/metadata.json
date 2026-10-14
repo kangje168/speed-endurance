@@ -1,6 +1,6 @@
 {
   "name": "Speed Endurance",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "kangje168",
   "supportEmail": "dukang668@gmail.com",
   "privacyPolicyUrl": "https://kangje168.github.io/speed-endurance-privacy/",
@@ -15,7 +15,7 @@
     "fr255s": "006-B3993-00",
     "fr255sm": "006-B3991-00"
   },
-  "permissions": ["Positioning", "Fit"],
+  "permissions": ["Positioning", "Fit", "Sensor"],
   "developerServer": false,
   "ads": false,
   "accountRequiredInApp": false

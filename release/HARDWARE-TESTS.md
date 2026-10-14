@@ -1,6 +1,6 @@
 # Hardware acceptance tests
 
-Release: 1.0.0. Tester: __________________. Watch model / firmware: __________________.
+Release: 1.0.1. Tester: __________________. Watch model / firmware: __________________.
 
 Run these tests on a compatible physical watch before public submission. Repeat layout and button checks on the 255S if possible; simulator results alone do not validate real GPS, vibration, sound, or FIT synchronization.
 
@@ -33,3 +33,5 @@ Run these tests on a compatible physical watch before public submission. Repeat 
 Screenshots to capture from the final build: pace selection, running, rest, and history. Use non-sensitive test activity data.
 
 Final result: __________________. Date: __________________.
+
+1.0.1 retest: check that a fresh weak GPS fix permits START without a speed value; weak GPS must not trigger slow-stop or set a personal best. Check UP/DOWN running-page navigation, live heart rate, no-data -- display, total time excluding rest, clock time, and return to the first page when stopping.

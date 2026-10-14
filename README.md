@@ -2,9 +2,9 @@
 
 Speed Endurance is a standalone Connect IQ watch app for the Forerunner 255, 255 Music, 255S, and 255S Music. Publisher: **kangje168**. Support: **dukang668@gmail.com**. The interface is in English.
 
-**Release candidate 1.0.0 has been compiled and exported with Garmin Connect IQ SDK 9.2.0. All four target models passed 12 native simulator tests each (48 successful test executions), with no app compilation warnings.** The package manifest and all four device binaries have been inspected; the package contains no private keys or tool files.
+**Release candidate 1.0.1 adds a relaxed GPS start gate and a heart-rate dashboard. See release/VALIDATION.md for updated validation.** The package manifest and all four device binaries have been inspected; the package contains no private keys or tool files.
 
-The store upload package is [release/SpeedEndurance-1.0.0.iq](release/SpeedEndurance-1.0.0.iq). Build evidence is in [release/build-report.json](release/build-report.json). The [public privacy policy](https://kangje168.github.io/speed-endurance-privacy/) is live and verified. Physical-watch validation, final screenshots, and store submission remain pending.
+The store upload package is [release/SpeedEndurance-1.0.1.iq](release/SpeedEndurance-1.0.1.iq). Build evidence is in [release/build-report.json](release/build-report.json). The [public privacy policy](https://kangje168.github.io/speed-endurance-privacy/) is live and verified. Physical-watch validation, final screenshots, and store submission remain pending.
 
 ## Training rules
 
@@ -23,7 +23,7 @@ The store upload package is [release/SpeedEndurance-1.0.0.iq](release/SpeedEndur
 | Button | Action |
 | --- | --- |
 | START / STOP (top right) | Start training; manually end the current interval while running; start the next interval during rest |
-| UP / DOWN (middle/bottom left) | Adjust the target pace; browse records in the history view |
+| UP / DOWN (middle/bottom left) | Switch pages while running; adjust pace before running or during rest; browse history |
 | Hold UP (menu) | Show or hide history; training continues timing in the background |
 | BACK / LAP (bottom right) | End the current interval while running; save and exit from rest or pace selection; return from history |
 
@@ -94,3 +94,9 @@ Rendering tests verify that drawing executes without runtime exceptions; they do
 - [ActivityRecording.Session](https://developer.garmin.com/connect-iq/api-docs/Toybox/ActivityRecording/Session.html): start, stop, lap creation, and FIT saving.
 - [Attention](https://developer.garmin.com/connect-iq/api-docs/Toybox/Attention.html): vibration and sound alerts.
 - [System](https://developer.garmin.com/connect-iq/api-docs/Toybox/System.html): millisecond timing and application exit.
+
+## Changes in 1.0.1
+
+Starting requires a real position of at least poor quality updated within five seconds, but no speed sample. Countdown checks still require usable GPS quality and valid speed updated within 2.5 seconds. Weak or missing data suspends the countdown and disqualifies the interval from a personal best. Supported multi-band positioning is requested when available.
+
+While running, UP or DOWN switches to a second dashboard: heart rate, interval time, total active time excluding rest, and clock time. Stale or unavailable heart rate displays --. Stopping returns to the first page. This dashboard uses Garmin sensor data; it is not the built-in Run application's screen.

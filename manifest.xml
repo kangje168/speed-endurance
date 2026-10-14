@@ -5,7 +5,7 @@
       <iq:product id="fr255"/><iq:product id="fr255m"/>
       <iq:product id="fr255s"/><iq:product id="fr255sm"/>
     </iq:products>
-    <iq:permissions><iq:uses-permission id="Positioning"/><iq:uses-permission id="Fit"/></iq:permissions>
+    <iq:permissions><iq:uses-permission id="Positioning"/><iq:uses-permission id="Fit"/><iq:uses-permission id="Sensor"/></iq:permissions>
     <iq:languages><iq:language>eng</iq:language></iq:languages>
     <iq:barrels/>
   </iq:application>

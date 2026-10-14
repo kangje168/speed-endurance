@@ -36,6 +36,18 @@ class PaceView extends WatchUi.View {
             }
             return;
         }
+        if (c.page == 1) {
+            var hr = c.heartRate != null && c.heartRateAt != null && now - c.heartRateAt <= 5000 ? c.heartRate.toString() : "--";
+            line(dc, h * 0.10, "HEART RATE", Graphics.FONT_SMALL, Graphics.COLOR_GREEN);
+            line(dc, h * 0.23, hr + " bpm", Graphics.FONT_LARGE, Graphics.COLOR_WHITE);
+            line(dc, h * 0.43, "Run " + formatTime(e.elapsed / 1000), Graphics.FONT_SMALL, Graphics.COLOR_WHITE);
+            var total = c.completedRunMs + (e.state == TrainingEngine.RUNNING ? e.elapsed : 0);
+            line(dc, h * 0.57, "Total " + formatTime(total / 1000), Graphics.FONT_SMALL, Graphics.COLOR_WHITE);
+            var clock = System.getClockTime();
+            line(dc, h * 0.70, clock.hour.format("%02d") + ":" + clock.min.format("%02d"), Graphics.FONT_SMALL, Graphics.COLOR_YELLOW);
+            line(dc, h * 0.81, "UP/DOWN: page", Graphics.FONT_XTINY, Graphics.COLOR_LT_GRAY);
+            return;
+        }
         var label = "SELECT PACE";
         if (e.state == TrainingEngine.RUNNING) { label = "RUNNING"; }
         if (e.state == TrainingEngine.RESTING) { label = "REST"; }
@@ -48,7 +60,7 @@ class PaceView extends WatchUi.View {
             main = formatTime(e.restElapsed / 1000);
         }
         line(dc, h * 0.37, main, Graphics.FONT_LARGE, Graphics.COLOR_WHITE);
-        var detail = "GPS: waiting";
+        var detail = c.gpsStatus(now);
         if (c.gpsReady(now)) {
             detail = "Pace " + (c.speed > 0 ? formatTime(1000.0 / c.speed) : "--:--");
         }

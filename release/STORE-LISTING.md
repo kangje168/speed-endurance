@@ -3,7 +3,7 @@
 ## App details
 
 - Name: **Speed Endurance**
-- Version: **1.0.0**
+- Version: **1.0.1**
 - Publisher: **kangje168**
 - App type: **Device App / Watch App**
 - Price: **Free**
@@ -43,12 +43,12 @@ An interval's recorded duration runs from START until the interval stops. It inc
 
 GPS behavior:
 
-This app requires usable GPS data to start and is intended for outdoor running. Zero speed with valid GPS counts as below target. Missing, poor, or stale GPS data resets the below-target countdown and prevents that interval from setting a personal best. The app uses instantaneous device speed; GPS fluctuations can reset the countdown when speed reaches the target. This version is not designed for indoor treadmill sessions.
+This app requires a fresh GPS position of at least poor quality to start; countdown checks require usable GPS quality and valid speed and is intended for outdoor running. Zero speed with valid GPS counts as below target. Missing, poor, or stale GPS data resets the below-target countdown and prevents that interval from setting a personal best. The app uses instantaneous device speed; GPS fluctuations can reset the countdown when speed reaches the target. This version is not designed for indoor treadmill sessions.
 
 Controls:
 
 - START / STOP: start an interval, end the current interval, or start the next interval during rest.
-- UP / DOWN: change the target pace when not running, or browse history.
+- UP / DOWN: switch running pages; change target pace before running or during rest; browse history.
 - Hold UP: open or close history.
 - BACK / LAP: end the current interval while running; save and exit during rest or pace selection; return from history.
 
@@ -58,9 +58,9 @@ Training history and personal bests are stored on your watch. FIT activities may
 
 Support: dukang668@gmail.com
 
-## What's new in 1.0.0
+## What's new in 1.0.1
 
-Initial release: target-pace speed endurance intervals, automatic stopping after 60 seconds below target, timed rest alerts, per-pace personal bests, local interval history, and FIT activity recording.
+Relaxed GPS start gate and a second running dashboard with heart rate, interval time, total active time, and clock time. Existing features: target-pace speed endurance intervals, automatic stopping after 60 seconds below target, timed rest alerts, per-pace personal bests, local interval history, and FIT activity recording.
 
 ## Store assets
 

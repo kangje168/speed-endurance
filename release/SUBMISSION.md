@@ -2,7 +2,7 @@
 
 ## Prepared identity
 
-- App: Speed Endurance, version 1.0.0.
+- App: Speed Endurance, version 1.0.1.
 - Publisher: kangje168.
 - Support email: dukang668@gmail.com.
 - App ID: `a5b8657e9da44c87b9b0177f94c368a1`.
@@ -20,7 +20,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts\release.ps1
 
 The script uses the project-local SDK and Java by default. Optional `-SdkBin`, `-JavaExecutable`, and `-DeveloperKey` arguments select existing tools. The execution-policy flag applies only to this process; it does not change system policy.
 
-Outputs are `release/SpeedEndurance-1.0.0.iq`, native test logs, and `release/build-report.json` with the package SHA-256 and per-device results. A package has not been produced until this script succeeds. Build output from a temporary toolchain smoke check is not a supported-device release.
+Outputs are `release/SpeedEndurance-1.0.1.iq`, native test logs, and `release/build-report.json` with the package SHA-256 and per-device results. A package has not been produced until this script succeeds. Build output from a temporary toolchain smoke check is not a supported-device release.
 
 ## Finish release validation
 
@@ -33,7 +33,7 @@ Outputs are `release/SpeedEndurance-1.0.0.iq`, native test logs, and `release/bu
 
 ## Submit
 
-Follow [Garmin's submission instructions](https://developer.garmin.com/connect-iq/submit-an-app/) and use your own Garmin developer account. Upload the `.iq` package, enter version 1.0.0, paste the prepared listing, add the icon and actual screenshots, and enter the public privacy-policy URL and support contact.
+Follow [Garmin's submission instructions](https://developer.garmin.com/connect-iq/submit-an-app/) and use your own Garmin developer account. Upload the `.iq` package, enter version 1.0.1, paste the prepared listing, add the icon and actual screenshots, and enter the public privacy-policy URL and support contact.
 
 Review the final store preview before sending it for review. Garmin controls approval and publication; local export does not publish the application. No store upload or review submission has been performed by this project setup.
 
